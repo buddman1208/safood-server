@@ -1,0 +1,21 @@
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/Safood');
+
+var userSchema = mongoose.Schema({
+    name: {type: String},
+    email: {type: String},
+    id: {type: String},
+    groupid: {type: String},
+    password: {type: String},
+    exception: {
+        religion: {type: Array},
+        allergy: {type: Array},
+        custom: {type: Array}
+    }
+});
+
+var groupSchma = mongoose.Schema({
+    name: {type: String},
+    id: {type: String},
+    members: {type: Array},
+});
