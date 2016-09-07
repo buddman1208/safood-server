@@ -10,6 +10,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 ## API Document
 
 * POST /auth/login : User Login
+
 > Required Params
 
 >> userid : User's ID [String]
@@ -23,6 +24,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 >> HTTP 401 : ID / Password Incorrect
 
 * POST /auth/register : User Register
+
 > Required Params
 
 >> userid : User's ID [String]
@@ -40,6 +42,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 ## Database Schema
 
 ### User
+
 > userid : User's id [String]
 
 > password : User's Password [String]
