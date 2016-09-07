@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/Safood');
 
 var userSchema = mongoose.Schema({
-    name: {type: String},
+    apikey: {type: String},
+    username: {type: String},
     email: {type: String},
-    id: {type: String},
+    userid: {type: String},
     groupid: {type: String},
     password: {type: String},
     exception: {
@@ -14,8 +15,13 @@ var userSchema = mongoose.Schema({
     }
 });
 
-var groupSchma = mongoose.Schema({
+var groupSchema = mongoose.Schema({
     name: {type: String},
     id: {type: String},
     members: {type: Array},
 });
+
+var User = mongoose.model(userSchema);
+var Group = mongoose.model(groupSchema);
+exports.User = User;
+exports.Group = Group;
