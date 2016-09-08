@@ -5,6 +5,7 @@ var userSchema = mongoose.Schema({
     userid: {type: String},
     username: {type: String},
     password: {type: String},
+    profileImage: {type: String},
     apikey: {type: String},
     groupid: {type: String},
     history: {type: String},

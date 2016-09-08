@@ -51,6 +51,10 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > groupid : User's Group Id [String]
 
+> apikey : User's ApiKey [String]
+
+> profileImage : User's Profile Image Address [String]
+
 > history : User's Search History [Array]
 
 >> Array Contains ONLY food's id
