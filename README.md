@@ -74,6 +74,9 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > members : Group's members [String Array]
 
+>> Array Contains ONLY user's id
+
+
 ### Food
 
 > name : Food's Name [String]
