@@ -39,6 +39,29 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 >> HTTP 409 : ID Conflict
 
+* POST /user/destroySelf
+* POST /user/getSelfInfo
+* POST /user/getSearchHistory
+* POST /user/updateSelfInfo
+* POST /user/updateAllergicException
+* POST /user/updateReligiousException
+* POST /user/updateKeywordException
+* POST /group/joinGroup
+* POST /group/leaveGroup
+* POST /group/getGroupInfo
+* POST /group/admin/createGroup
+* POST /group/admin/destroyGroup
+* POST /group/admin/modifyGroupInfo
+* POST /group/admin/addUser
+* POST /group/admin/removeUser
+* POST /food/getFoodInfo
+* POST /food/group/add
+* POST /food/group/remove
+* POST /food/foodDic/postArticle
+* POST /food/foodDic/modifyArticle
+* POST /food/foodDic/deleteArticle
+* POST /food/foodDic/searchArticle
+
 ## Database Schema
 
 ### User
