@@ -100,6 +100,8 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > admin : FoodGroup's admin (user/group, not defined) [String]
 
+> color : FoodGroup's theme color [String]
+
 > lastUpdate : FoodGroup's last updated date [Date]
 
 > foodList : Food list in this group [String Array]
