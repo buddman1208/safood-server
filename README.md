@@ -64,7 +64,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 >> custom : User's Custom Exception [String Array]
     
 
-### Group
+### UserGroup
 
 > name : Group's name [String]
 
@@ -74,7 +74,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > members : Group's members [String Array]
 
-# Food
+### Food
 
 > name : Food's Name [String]
 
@@ -94,7 +94,14 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > foodOnceIntake : Food's recommended intake at once [String]
 
+### SafoodGroup
 
+> name : FoodGroup's name [String]
 
+> admin : FoodGroup's admin (user/group, not defined) [String]
 
+> lastUpdate : FoodGroup's last updated date [Date]
 
+> foodList : Food list in this group [String Array]
+
+>> Array Contains ONLY food's id
