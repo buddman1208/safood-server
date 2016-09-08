@@ -51,6 +51,10 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > groupid : User's Group Id [String]
 
+> history : User's Search History [Array]
+
+>> Array Contains ONLY food's id
+
 > exception: 
 
 >> religion : User's Religion Exception Code [Number Array]
@@ -66,6 +70,31 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > groupid : Group's id [String]
 
+> admin : Group's Admin [String]
+
 > members : Group's members [String Array]
+
+# Food
+
+> name : Food's Name [String]
+
+> weight : Food's weight [String]
+
+> weightUnit : Food's weight unit [String]
+
+> barcode : Food's barcode [String]
+
+> foodType : Food's type [String]
+
+> foodAllergic : Food's allergic ingredient [String]
+
+> foodIngredient : Food's full ingredient [String]
+
+> foodCalorie : Food's calorie [Number]
+
+> foodOnceIntake : Food's recommended intake at once [String]
+
+
+
 
 
