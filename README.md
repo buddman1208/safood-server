@@ -9,47 +9,218 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 ## API Document
 
+* Common Response
+
+    HTTP 200: Success
+
+    HTTP 401: Bad Request
+
+    HTTP 403: Params Missing
+
+    HTTP 409: Conflict
+
 * POST /auth/login : User Login
 
-> Required Params
+> Params
 
->> userid : User's ID [String]
+    userid : User's ID [String]
 
->> password : User's Password [String]
+    password : User's    Password [String]
 
 > Response
 
->> HTTP 200 : User
+     HTTP 200 : User
 
->> HTTP 401 : ID / Password Incorrect
+     HTTP 401 : ID / Password Incorrect
 
 * POST /auth/register : User Register
 
-> Required Params
+> Params
 
->> userid : User's ID [String]
+    userid : User's ID [String]
 
->> username : User's Name [String]
+    username : User's Name [String]
 
->> password : User's Password [String]
+    password : User's Password [String]
 
 > Response
 
->> HTTP 200 : User
+    HTTP 200 : User
 
->> HTTP 409 : ID Conflict
+    HTTP 409 : ID Conflict
 
 * POST /user/destroySelf
+
+> Params
+
+    apikey : User's Apikey [String]
+
+> Response
+
+    HTTP 200: Success
+
 * POST /user/getSelfInfo
+
+> Params
+
+    apikey : User's Apikey [String]
+
+> Response
+
+    HTTP 200: return User
+
 * POST /user/getSearchHistory
+
+> Params
+
+    apikey : User's Apikey [String]
+
+> Response
+
+    HTTP 200 : return User
+
 * POST /user/updateSelfInfo
+
+> Params
+
+    userid : User's id [String]
+
+    password : User's Password [String]
+
+    username : User Name [String]
+
+    profileImage : User's Profile Image [File]
+
+> Response
+
+    HTTP 200 : return User
+
+    HTTP 403 : Params Missing
+
 * POST /user/updateAllergicException
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    allergic : selected allergic type [Number]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Bad Request
+
 * POST /user/updateReligiousException
-* POST /user/updateKeywordException
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    allergic : selected religious type [Number]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Bad Request
+
+* POST /user/addKeywordException
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    keyword : Exception Keyword [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Bad Request
+
+* POST /user/removeKeywordException
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    keyword : Exception Keyword [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Bad Request
+
+* POST /group/searchGroup
+
+> Params
+
+    query : Group's Name [String]
+
+> Response
+
+    HTTP 200 : return Group List [String Json]
+
+    HTTP 401 : No Group Found
+
 * POST /group/joinGroup
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    groupid : Group's ID [String]
+
+> Response
+
+    HTTP 200 : Join Success
+
+    HTTP 401 : No Group Found
+
 * POST /group/leaveGroup
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    groupid : Group's ID [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Information incorrect
+
 * POST /group/getGroupInfo
+
+> Params
+
+    groupid : Group's ID [String]
+
+> Response
+
+    HTTP 200 : return Group
+
+    HTTP 401 : No group found
+
 * POST /group/admin/createGroup
+
+> Params
+
+    name : Group's name [String]
+
+    groupid : Group's id [String]
+
+    userid : User, which will be admin of this group [String]
+
+> Response
+
+    HTTP 200 : return Group
+
+    HTTP 401 : Bad Request
+
 * POST /group/admin/destroyGroup
 * POST /group/admin/modifyGroupInfo
 * POST /group/admin/addUser
@@ -93,9 +264,11 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 ### UserGroup
 
-> name : Group's name [String]
+> groupname : Group's name [String]
 
-> groupid : Group's id [String]
+> groupid : Group's id (@GroupID) [String]
+
+> groupkey : Group's key [String]
 
 > admin : Group's Admin [String]
 
