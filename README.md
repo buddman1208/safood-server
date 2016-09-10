@@ -49,6 +49,20 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     HTTP 409 : ID Conflict
 
+* POST /auth/login/auto : Auto Login
+
+> Params
+
+    userid : User's ID [String]
+
+    apikey : User's apikey [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Access Denied
+
 * POST /user/destroySelf
 
 > Params
