@@ -3,7 +3,7 @@ module.exports = auth;
 function auth(app, db, randomStr) {
     var registerParams = ['userid', 'username', 'password'];
     var loginParams = ['userid', 'password'];
-    var autologinParams = ['token'];
+    var autologinParams = ['userid', 'apikey'];
     app.post('/auth/login', function (req, res) {
         if (loginParams.every(str => req.body[str] != undefined)) {
             db.User.findOne({userid: req.body.userid}, function (err, doc) {
@@ -22,16 +22,18 @@ function auth(app, db, randomStr) {
             db.User.find({id: req.body.userid}, function (err, docs) {
                 if (docs.length == 0) {
                     var newUser = new db.User({
-                        apikey : randomStr.generate(),
-                        groupid : '',
-                        exception : {
+                        apikey: randomStr.generate(),
+                        groupid: '',
+                        profileImage: '',
+                        history: {},
+                        exception: {
                             religion: {},
                             allergy: {},
                             custom: {}
                         }
                     });
                     registerParams.forEach(a => newUser[a] = req.body[a]);
-                    console.log(newUser);
+                    console.log('User Register : \n' + newUser);
                     newUser.save();
                     res.send(newUser);
                 } else res.sendStatus(409);
@@ -39,8 +41,11 @@ function auth(app, db, randomStr) {
         } else res.sendStatus(403);
     });
     app.post('/auth/login/auto', function (req, res) {
-
+        if(autologinParams.forEach(str -> req.body[str] != undefined && req.body[str] != null)){
+            db.User.findOne({userid : req.body.userid, apikey : req.body.apikey}, function(err, doc){
+                if(doc != null) res.status(200).send(doc);
+                else res.sendStatus(401);
+            });
+        } else res.sendStatus(403);
     });
-    // app.post('/auth/findPassword');
-
 }
