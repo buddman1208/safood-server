@@ -153,6 +153,22 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     HTTP 401 : Bad Request
 
+* POST /user/searchUser
+
+> Params
+
+    searchByName : selected whether search by name or not [Boolean]
+
+    username : User's name [String]
+
+    userid : User's id [String]
+
+> Response
+
+    HTTP 200 : return User List [String Json]
+
+    HTTP 401 : No User Found
+
 * POST /group/searchGroup
 
 > Params
@@ -205,6 +221,18 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     HTTP 401 : No group found
 
+* POST /group/admin/checkGroupName
+
+> Params
+
+    groupname : Group's Name [String]
+
+> Response
+
+    HTTP 200 : No Conflict
+
+    HTTP 409 : Conflict
+
 * POST /group/admin/createGroup
 
 > Params
@@ -222,9 +250,69 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
     HTTP 401 : Bad Request
 
 * POST /group/admin/destroyGroup
+
+> Params
+
+    userid : User's id, to check if user is admin [String]
+
+    groupid : Group's id [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Access Denied
+
 * POST /group/admin/modifyGroupInfo
+
+> Params
+
+    userid : User's id, to check if user is admin [String]
+
+    groupname : Group's name [String]
+
+    groupid : Group's id (@GroupID) [String]
+
+> Response
+
+    HTTP 200 : Success [String]
+
+    HTTP 401 : Access Denied
+
 * POST /group/admin/addUser
+
+> Params
+
+    userid : User's id to check if user is admin [String]
+
+    groupid : Group's id [String]
+
+    targetid : Target user's id [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Access Denied
+
 * POST /group/admin/removeUser
+
+> Params
+
+    userid : User's id to check if user is admin [String]
+
+    groupid : Group's id [String]
+
+    targetid : Target user's id [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 401 : Access Denied
+
+    HTTP 402 : User is not in group
+
 * POST /food/getFoodInfo
 * POST /food/group/add
 * POST /food/group/remove
