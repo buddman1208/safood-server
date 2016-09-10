@@ -17,8 +17,9 @@ var userSchema = mongoose.Schema({
 });
 
 var userGroupSchema = mongoose.Schema({
-    name: {type: String},
+    groupname: {type: String},
     groupid: {type: String},
+    groupkey: {type: String},
     admin: {type: String},
     members: {type: Array}
 });
@@ -47,6 +48,7 @@ var UserGroup = mongoose.model(userGroupSchema);
 var Food = mongoose.model(foodSchema);
 var SafoodGroup = mongoose.model(safoodGroupSchema);
 exports.User = User;
+exports.db = db;
 exports.UserGroup = UserGroup;
 exports.Food = Food;
 exports.SafoodGroup = SafoodGroup;
