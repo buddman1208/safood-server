@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 require('./routes/auth')(app, db, randomstring);
+require('./routes/user')(app, db, randomstring);
 
 module.exports = app;
 http.listen(port, function(){
