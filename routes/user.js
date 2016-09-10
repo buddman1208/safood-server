@@ -21,5 +21,16 @@ function user(app, db, randomStr) {
             })
         } else res.sendStatus(403);
     });
+    app.post('/user/getSearchHistory', function (req, res) {
+        var apikey = req.body.apikey;
+        if (apikey != undefined && apikey != null) {
+            db.User.findOne({apikey: apikey}, function (err, doc) {
+                if (err) {
+                    throw err;
+                } else res.send(doc.history);
+            })
+        } else res.sendStatus(403);
+    });
+
 
 }
