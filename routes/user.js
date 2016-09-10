@@ -32,5 +32,17 @@ function user(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
+    app.post('/user/updateSelfInfo', function (req, res) {
+        // TODO file update must be modified
+        var params = ['userid', 'password', 'username', 'profileImage'];
+        if (apikey != undefined && apikey != null) {
+            db.User.update({userid: req.body.userid}, {params: req.body[params]}, function (err, numAff) {
+                if (err) {
+                    throw err;
+                } else res.sendStatus(200);
+            })
+        } else res.sendStatus(403);
+    });
+
 
 }
