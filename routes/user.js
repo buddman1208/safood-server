@@ -70,7 +70,7 @@ function user(app, db, randomStr) {
                     throw err;
                 } else {
                     doc.exception.religion[req.body['religious']] = true;
-                    db.User.update({apikey: req.body.apikey}, {exception: {religion: doc.exception.religion}}, function (err, numAff) {
+                    db.User.update({apikey: req.body.apikey}, {exception: {religion: doc.exception.religion}}, function (err) {
                         if (err) throw err;
                         else res.sendStatus(200);
                     });
@@ -79,6 +79,25 @@ function user(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
+    app.post('/user/addKeywordException', function (req, res) {
+        var params = ['apikey', 'keyword'];
+        if (checkParams(req.body, params)) {
+            db.User.findOne({apikey: req.body.apikey}, function (err, doc) {
+                if (doc != null) {
+                    var custom = doc.exception.custom;
+                    var keyword = req.body.keyword;
+                    if (custom.indexOf(keyword) > -1) res.sendStatus(409);
+                    else {
+                        custom.push(keyword);
+                        db.User.update({apikey: req.body.apikey}, {exception: {custom: custom}}, function (err) {
+                            if (err) throw err;
+                            else res.sendStatus(200);
+                        });
+                    }
+                } else res.sendStatus(401);
+            });
+        } else res.sendStatus(403);
+    });
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
     }
