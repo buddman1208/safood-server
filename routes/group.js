@@ -21,6 +21,7 @@ function group(app, db, randomStr) {
             })
         } else res.sendStatus(403);
     });
+
     app.post('/group/joinGroup', function (req, res) {
         var params = ['apikey', 'groupid'];
         if (checkParams(req.body, params)) {
@@ -55,6 +56,17 @@ function group(app, db, randomStr) {
                     } else res.sendStatus(409);
                 } else res.sendStatus(401);
             });
+        } else res.sendStatus(403);
+    });
+
+
+    app.post('/group/admin/checkGroupName', function (req, res) {
+        var params = ['groupname'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.find({groupname: req.body.groupname}, function (err, docs) {
+                if (docs.length != 0) res.sendStatus(200);
+                else res.sendStatus(409);
+            })
         } else res.sendStatus(403);
     });
     function checkParams(body, params) {
