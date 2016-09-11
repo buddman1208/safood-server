@@ -59,10 +59,10 @@ function group(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
-    app.post('/group/admin/checkGroupName', function (req, res) {
-        var params = ['groupname'];
+    app.post('/group/admin/checkGroupTag', function (req, res) {
+        var params = ['grouptag'];
         if (checkParams(req.body, params)) {
-            db.UserGroup.find({groupname: req.body.groupname}, function (err, docs) {
+            db.UserGroup.find({grouptag: req.body.grouptag}, function (err, docs) {
                 if (docs.length != 0) res.sendStatus(200);
                 else res.sendStatus(409);
             })
