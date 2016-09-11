@@ -255,7 +255,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > Params
 
-    name : Group's name [String]
+    groupname : Group's name [String]
 
     groupid : Group's id [String]
 
