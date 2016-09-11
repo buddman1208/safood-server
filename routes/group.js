@@ -11,6 +11,16 @@ function group(app, db, randomStr) {
             })
         } else res.sendStatus(403);
     });
+
+    app.post('/group/getGroupInfo', function (req, res) {
+        var params = ['groupid'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.find({groupid: req.body.groupid}, function (err, doc) {
+                if (doc.length != 0) res.send(doc);
+                else res.sendStatus(401);
+            })
+        } else res.sendStatus(403);
+    });
     app.post('/group/joinGroup', function (req, res) {
         var params = ['apikey', 'groupid'];
         if (checkParams(req.body, params)) {
