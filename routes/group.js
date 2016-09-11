@@ -82,13 +82,29 @@ function group(app, db, randomStr) {
                     });
                     params.forEach(e => newGroup[e] = req.body[e]);
                     newGroup.save(function (err) {
-                        if(err) throw err;
+                        if (err) throw err;
                         else res.status(200).send(newGroup);
                     });
                 }
                 else res.sendStatus(409);
             })
         } else res.sendStatus(403);
+    });
+
+    app.post('/group/admin/destroyGroup', function (req, res) {
+        var params = ['userid', 'groupid'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (doc != null) {
+                    if (doc.admin == req.body.userid) {
+                        db.UserGroup.remove({groupid: req.body.groupid}, function (err, numAF) {
+                            if (err) throw err;
+                            else res.sendStatus(200);
+                        })
+                    } else res.sendStatus(401);
+                } else res.sendStatus(400);
+            })
+        }
     });
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
