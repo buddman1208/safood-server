@@ -70,10 +70,16 @@ function group(app, db, randomStr) {
     });
 
     app.post('/group/admin/createGroup', function (req, res) {
-        var params = ['groupname', 'groupid', 'userid'];
+        var params = ['groupname', 'grouptag', 'admin'];
         if (checkParams(req.body, params)) {
-            db.UserGroup.find({groupname: req.body.groupname}, function (err, docs) {
-                if (docs.length != 0) res.sendStatus(200);
+            db.UserGroup.find({grouptag: req.body.grouptag}, function (err, docs) {
+                if (docs.length != 0) {
+                    var newGroup = new db.UserGroup({
+                        groupid: randomStr.generate(),
+                        members: [req.body.admin]
+                    });
+                    params.forEach(e => newGroup[e] = req.body[e]);
+                }
                 else res.sendStatus(409);
             })
         } else res.sendStatus(403);
