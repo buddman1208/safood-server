@@ -14,12 +14,17 @@ function group(app, db, randomStr) {
     app.post('/group/joinGroup', function (req, res) {
         var params = ['apikey', 'groupid'];
         if (checkParams(req.body, params)) {
-            db.UserGroup.update({groupid: req.body.groupid},
-                {$push: {members: req.body.apikey}}, function (err, numAff) {
-                    if (err) throw err;
-                    else if (numAff == 0) res.sendStatus(401);
-                    else res.sendStatus(200);
-                });
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (err) throw err;
+                else if (doc != null) {
+                    db.UserGroup.update({groupid: req.body.groupid},
+                        {$push: {members: req.body.apikey}}, function (err, numAff) {
+                            if (err) throw err;
+                            else if (numAff == 0) res.sendStatus(401);
+                            else res.sendStatus(200);
+                        });
+                } else res.sendStatus(401);
+            });
         } else res.sendStatus(403);
     });
     function checkParams(body, params) {
