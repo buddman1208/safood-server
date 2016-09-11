@@ -153,6 +153,8 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     HTTP 401 : Bad Request
 
+    HTTP 409 : Conflict
+
 * POST /user/removeKeywordException
 
 > Params
