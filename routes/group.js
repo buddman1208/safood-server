@@ -130,11 +130,31 @@ function group(app, db, randomStr) {
             db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
                 if (doc != null) {
                     if (doc.admin == req.body.userid) {
-                        db.UserGroup.update({groupid: req.body.groupid},
-                            {$push: {members: req.body.targetid}}, function (err, numAF) {
-                                if (err) throw err;
-                                else res.sendStatus(200);
-                            });
+                        if (doc.members.indexOf(req.body.targetid) == -1) {
+                            db.UserGroup.update({groupid: req.body.groupid},
+                                {$push: {members: req.body.targetid}}, function (err, numAF) {
+                                    if (err) throw err;
+                                    else res.sendStatus(200);
+                                });
+                        } else res.sendStatus(409);
+                    } else res.sendStatus(401);
+                } else res.sendStatus(400);
+            })
+        }
+    });
+    app.post('/group/admin/removeUser', function (req, res) {
+        var params = ['userid', 'targetid', 'groupid'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (doc != null) {
+                    if (doc.admin == req.body.userid) {
+                        if (doc.members.indexOf(req.body.targetid) > -1) {
+                            db.UserGroup.update({groupid: req.body.groupid},
+                                {$pull: {members: req.body.targetid}}, function (err, numAF) {
+                                    if (err) throw err;
+                                    else res.sendStatus(200);
+                                });
+                        } else res.sendStatus(409);
                     } else res.sendStatus(401);
                 } else res.sendStatus(400);
             })
