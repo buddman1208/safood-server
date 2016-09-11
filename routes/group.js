@@ -108,6 +108,22 @@ function group(app, db, randomStr) {
             })
         }
     });
+    app.post('/group/admin/modifyGroupInfo', function (req, res) {
+        var params = ['userid', 'groupname', 'groupid', 'grouptag'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (doc != null) {
+                    if (doc.admin == req.body.userid) {
+                        db.UserGroup.update({groupid: req.body.groupid},
+                            {groupname: req.body.groupname, grouptag: req.body.grouptag}, function (err, numAF) {
+                                if (err) throw err;
+                                else res.sendStatus(200);
+                            });
+                    } else res.sendStatus(401);
+                } else res.sendStatus(400);
+            })
+        }
+    });
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
     }
