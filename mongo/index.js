@@ -19,7 +19,7 @@ var userSchema = mongoose.Schema({
 var userGroupSchema = mongoose.Schema({
     groupname: {type: String},
     groupid: {type: String},
-    groupkey: {type: String},
+    grouptag: {type: String},
     admin: {type: String},
     members: {type: Array}
 });
