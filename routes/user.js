@@ -1,6 +1,6 @@
-module.exports = auth;
+module.exports = user;
 
-function user(app, db, randomStr) {
+function user(app, db) {
     app.post('/user/destroySelf', function (req, res) {
         var apikey = req.body.apikey;
         if (apikey != undefined && apikey != null) {
@@ -138,6 +138,8 @@ function user(app, db, randomStr) {
             }
         } else res.status(403).send('Missing Params');
     });
+
+
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
     }
