@@ -9,7 +9,7 @@ function user(app, db, randomStr) {
                     throw err;
                 } else res.sendStatus(200);
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
     app.post('/user/getSelfInfo', function (req, res) {
         var apikey = req.body.apikey;
@@ -19,7 +19,7 @@ function user(app, db, randomStr) {
                     throw err;
                 } else res.send(doc);
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
     app.post('/user/getSearchHistory', function (req, res) {
         var apikey = req.body.apikey;
@@ -29,7 +29,7 @@ function user(app, db, randomStr) {
                     throw err;
                 } else res.send(doc.history);
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
 
     app.post('/user/updateSelfInfo', function (req, res) {
@@ -42,7 +42,7 @@ function user(app, db, randomStr) {
                     throw err;
                 } else res.sendStatus(200);
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
 
     app.post('/user/updateAllergicException', function (req, res) {
@@ -59,7 +59,7 @@ function user(app, db, randomStr) {
                     });
                 }
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
 
     app.post('/user/updateReligiousException', function (req, res) {
@@ -76,7 +76,7 @@ function user(app, db, randomStr) {
                     });
                 }
             })
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
 
     app.post('/user/addKeywordException', function (req, res) {
@@ -96,7 +96,7 @@ function user(app, db, randomStr) {
                     }
                 } else res.sendStatus(401);
             });
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
     });
 
     app.post('/user/removeKeywordException', function (req, res) {
@@ -116,7 +116,27 @@ function user(app, db, randomStr) {
                     } else res.sendStatus(409);
                 } else res.sendStatus(401);
             });
-        } else res.sendStatus(403);
+        } else res.status(403).send('Missing Params');
+    });
+
+    app.post('/user/searchUser', function (req, res) {
+        var params = ['searchByName', 'username', 'userid'];
+        var searchByName = req.body.searchByName;
+        if (checkParams(req.body, params)) {
+            if (searchByName) {
+                db.User.findOne({username: req.body.username}, function (err, doc) {
+                    if (err) throw err;
+                    else if (doc != null) res.send(doc);
+                    else res.sendStatus(401);
+                });
+            } else {
+                db.User.findOne({userid: req.body.userid}, function (err, doc) {
+                    if (err) throw err;
+                    else if (doc != null) res.send(doc);
+                    else res.sendStatus(401);
+                });
+            }
+        } else res.status(403).send('Missing Params');
     });
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
