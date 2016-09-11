@@ -59,9 +59,18 @@ function group(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
-
     app.post('/group/admin/checkGroupName', function (req, res) {
         var params = ['groupname'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.find({groupname: req.body.groupname}, function (err, docs) {
+                if (docs.length != 0) res.sendStatus(200);
+                else res.sendStatus(409);
+            })
+        } else res.sendStatus(403);
+    });
+
+    app.post('/group/admin/createGroup', function (req, res) {
+        var params = ['groupname', 'groupid', 'userid'];
         if (checkParams(req.body, params)) {
             db.UserGroup.find({groupname: req.body.groupname}, function (err, docs) {
                 if (docs.length != 0) res.sendStatus(200);
