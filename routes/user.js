@@ -34,9 +34,10 @@ function user(app, db, randomStr) {
 
     app.post('/user/updateSelfInfo', function (req, res) {
         // TODO file update must be modified
-        var params = ['userid', 'password', 'username', 'profileImage'];
-        if (apikey != undefined && apikey != null) {
-            db.User.update({userid: req.body.userid}, {params: req.body[params]}, function (err, numAff) {
+        var params = ['apikey', 'userid', 'password', 'username', 'profileImage'];
+        var update_params = ['userid', 'password', 'username', 'profileImage'];
+        if (checkParams(req.body, params)) {
+            db.User.update({apikey: req.body.apikey}, {update_params: req.body[update_params]}, function (err, numAff) {
                 if (err) {
                     throw err;
                 } else res.sendStatus(200);
@@ -44,5 +45,26 @@ function user(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
+    app.post('/user/updateAllergicException', function (req, res) {
+        // TODO file update must be modified
+        var params = ['apikey', 'allergic'];
+        if (checkParams(req.body, params)) {
+            db.User.findOne({apikey: req.body.apikey}, function (err, doc) {
+                if (err) {
+                    throw err;
+                } else {
+                    doc.exception.allergy[req.body.allergic] = true;
+                    db.User.update({apikey: req.body.apikey}, {exception: {allergy: doc.exception.allergy}}, function (err, numAff) {
+                        if (err) throw err;
+                        else res.sendStatus(200);
+                    });
+                }
+            })
+        } else res.sendStatus(403);
+    });
 
+
+    function checkParams(body, params) {
+        return params.forEach(str -> body[str] != undefined && body[str] != null);
+    }
 }
