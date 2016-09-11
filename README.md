@@ -265,7 +265,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     HTTP 200 : return Group
 
-    HTTP 401 : Bad Request
+    HTTP 409 : Group Tag Conflict
 
 * POST /group/admin/destroyGroup
 
