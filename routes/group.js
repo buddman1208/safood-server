@@ -76,9 +76,15 @@ function group(app, db, randomStr) {
                 if (docs.length != 0) {
                     var newGroup = new db.UserGroup({
                         groupid: randomStr.generate(),
-                        members: [req.body.admin]
+                        members: [
+                            req.body.admin
+                        ]
                     });
                     params.forEach(e => newGroup[e] = req.body[e]);
+                    newGroup.save(function (err) {
+                        if(err) throw err;
+                        else res.status(200).send(newGroup);
+                    });
                 }
                 else res.sendStatus(409);
             })
