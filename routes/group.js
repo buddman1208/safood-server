@@ -100,7 +100,9 @@ function group(app, db, randomStr) {
                         db.UserGroup.remove({groupid: req.body.groupid}, function (err, numAF) {
                             if (err) throw err;
                             else res.sendStatus(200);
-                        })
+                        });
+                        // db.User.findAndModify({groupid : req.body.groupid}, )
+                        // TODO Remove groupid from user
                     } else res.sendStatus(401);
                 } else res.sendStatus(400);
             })
