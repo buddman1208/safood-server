@@ -124,6 +124,22 @@ function group(app, db, randomStr) {
             })
         }
     });
+    app.post('/group/admin/addUser', function (req, res) {
+        var params = ['userid', 'targetid', 'groupid'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (doc != null) {
+                    if (doc.admin == req.body.userid) {
+                        db.UserGroup.update({groupid: req.body.groupid},
+                            {$push: {members: req.body.targetid}}, function (err, numAF) {
+                                if (err) throw err;
+                                else res.sendStatus(200);
+                            });
+                    } else res.sendStatus(401);
+                } else res.sendStatus(400);
+            })
+        }
+    });
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
     }
