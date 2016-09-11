@@ -97,6 +97,8 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > Params
 
+    apikey : User's apikey [String]
+    
     userid : User's id [String]
 
     password : User's Password [String]
