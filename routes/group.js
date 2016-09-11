@@ -17,12 +17,32 @@ function group(app, db, randomStr) {
             db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
                 if (err) throw err;
                 else if (doc != null) {
-                    db.UserGroup.update({groupid: req.body.groupid},
-                        {$push: {members: req.body.apikey}}, function (err, numAff) {
-                            if (err) throw err;
-                            else if (numAff == 0) res.sendStatus(401);
-                            else res.sendStatus(200);
-                        });
+                    if (doc.members.indexOf(req.body.apikey) == -1) {
+                        db.UserGroup.update({groupid: req.body.groupid},
+                            {$push: {members: req.body.apikey}}, function (err, numAff) {
+                                if (err) throw err;
+                                else if (numAff == 0) res.sendStatus(401);
+                                else res.sendStatus(200);
+                            });
+                    } else res.sendStatus(409);
+                } else res.sendStatus(401);
+            });
+        } else res.sendStatus(403);
+    });
+    app.post('/group/leaveGroup', function (req, res) {
+        var params = ['apikey', 'groupid'];
+        if (checkParams(req.body, params)) {
+            db.UserGroup.findOne({groupid: req.body.groupid}, function (err, doc) {
+                if (err) throw err;
+                else if (doc != null) {
+                    if (doc.members.indexOf(req.body.apikey) > -1) {
+                        db.UserGroup.update({groupid: req.body.groupid},
+                            {pull: {members: req.body.apikey}}, function (err, numAff) {
+                                if (err) throw err;
+                                else if (numAff == 0) res.sendStatus(401);
+                                else res.sendStatus(200);
+                            });
+                    } else res.sendStatus(409);
                 } else res.sendStatus(401);
             });
         } else res.sendStatus(403);
