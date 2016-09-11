@@ -46,7 +46,6 @@ function user(app, db, randomStr) {
     });
 
     app.post('/user/updateAllergicException', function (req, res) {
-        // TODO file update must be modified
         var params = ['apikey', 'allergic'];
         if (checkParams(req.body, params)) {
             db.User.findOne({apikey: req.body.apikey}, function (err, doc) {
@@ -63,6 +62,22 @@ function user(app, db, randomStr) {
         } else res.sendStatus(403);
     });
 
+    app.post('/user/updateReligiousException', function (req, res) {
+        var params = ['apikey', 'religious'];
+        if (checkParams(req.body, params)) {
+            db.User.findOne({apikey: req.body.apikey}, function (err, doc) {
+                if (err) {
+                    throw err;
+                } else {
+                    doc.exception.religion[req.body['religious']] = true;
+                    db.User.update({apikey: req.body.apikey}, {exception: {religion: doc.exception.religion}}, function (err, numAff) {
+                        if (err) throw err;
+                        else res.sendStatus(200);
+                    });
+                }
+            })
+        } else res.sendStatus(403);
+    });
 
     function checkParams(body, params) {
         return params.forEach(str -> body[str] != undefined && body[str] != null);
