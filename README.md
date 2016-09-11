@@ -259,7 +259,7 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
     groupid : Group's id [String]
 
-    userid : User, which will be admin of this group [String]
+    admin : User, which will be admin of this group [String]
 
 > Response
 
