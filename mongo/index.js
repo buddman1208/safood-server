@@ -43,10 +43,10 @@ var safoodGroupSchema = mongoose.Schema({
     foodList: {type: Array}
 });
 
-var User = mongoose.model(userSchema);
-var UserGroup = mongoose.model(userGroupSchema);
-var Food = mongoose.model(foodSchema);
-var SafoodGroup = mongoose.model(safoodGroupSchema);
+var User = mongoose.model("User", userSchema);
+var UserGroup = mongoose.model("UserGroup", userGroupSchema);
+var Food = mongoose.model("Food", foodSchema);
+var SafoodGroup = mongoose.model("SafoodGroup", safoodGroupSchema);
 exports.User = User;
 exports.db = db;
 exports.UserGroup = UserGroup;
