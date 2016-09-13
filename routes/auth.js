@@ -27,9 +27,9 @@ function auth(app, db, randomStr) {
                         profileImage: '',
                         history: {},
                         exception: {
-                            religion: {false, false, false, false, false},
-                            allergy: {false, false, false, false, false},
-                            custom: {}
+                            religion: [false, false, false, false, false],
+                            allergy: [false, false, false, false, false],
+                            custom: []
                         }
                     });
                     registerParams.forEach(a => newUser[a] = req.body[a]);
@@ -41,7 +41,7 @@ function auth(app, db, randomStr) {
         } else res.sendStatus(403);
     });
     app.post('/auth/login/auto', function (req, res) {
-        if (autologinParams.forEach(str -> req.body[str] != undefined && req.body[str] != null)) {
+        if (autologinParams.forEach(str => req.body[str] != undefined && req.body[str] != null)) {
             db.User.findOne({userid: req.body.userid, apikey: req.body.apikey}, function (err, doc) {
                 if (doc != null) res.status(200).send(doc);
                 else res.sendStatus(401);

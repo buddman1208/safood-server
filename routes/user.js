@@ -141,6 +141,6 @@ function user(app, db) {
 
 
     function checkParams(body, params) {
-        return params.forEach(str -> body[str] != undefined && body[str] != null);
+        return params.forEach(str => body[str] != undefined && body[str] != null);
     }
 }
