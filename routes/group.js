@@ -83,6 +83,9 @@ function group(app, db, randomStr) {
                     params.forEach(e => newGroup[e] = req.body[e]);
                     newGroup.save(function (err) {
                         if (err) throw err;
+                    });
+                    db.User.update({userid:req.body.admin}, {groupid:newGroup.groupid}, function(err, numAf){
+                        if(err) throw err;
                         else res.status(200).send(newGroup);
                     });
                 }
@@ -164,6 +167,6 @@ function group(app, db, randomStr) {
         }
     });
     function checkParams(body, params) {
-        return params.forEach(str -> body[str] != undefined && body[str] != null);
+        return params.every(str => body[str] != null);
     }
 }

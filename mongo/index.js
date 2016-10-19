@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     profileImage: {type: String},
     apikey: {type: String},
     groupid: {type: String},
-    history: {type: String},
+    history: {type: Array},
     exception: {
         religion: {type: Array},
         allergy: {type: Array},
