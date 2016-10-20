@@ -29,8 +29,8 @@ function auth(app, db, randomStr) {
                         profileImage: '',
                         history: [],
                         exception: {
-                            religion: [false, false, false, false, false],
-                            allergy: [false, false, false, false, false],
+                            religion: [false, false, false, false],
+                            allergy: [false, false, false, false, false, false, false, false, false, false],
                             custom: []
                         }
                     });

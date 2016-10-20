@@ -16,6 +16,8 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
     HTTP 401: Bad Request
 
     HTTP 403: Params Missing
+    
+    HTTP 405: not found in DB
 
     HTTP 409: Conflict
 
@@ -341,6 +343,90 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 * POST /food/foodDic/deleteArticle
 * POST /food/foodDic/searchArticle
 
+
+* POST /search/barcode
+
+> Params
+
+    apikey : User's Apikey [String]
+
+    barcode : barcode number [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 405 : not found
+    
+* POST /search/
+
+> Params
+
+    foodname : foodname [String]
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 405 : not found   
+
+* POST /food/create
+
+> Params
+
+    name : food name [String]
+
+    material : food contain material [String]
+    
+    content : content
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 405 : not found
+
+* POST /group/memo
+
+> Params
+
+    groupid : groupid [String]
+
+> Response
+
+    HTTP 200 : Success send memo
+
+    HTTP 405 : not found
+
+* POST /group/memoAdd
+
+> Params
+
+    title : title [String]
+    content : content [String]
+    color : color [Number]
+    foods : foods [String]
+    groupid : groupid [String]
+
+> Response
+
+    HTTP 200 : Success addmemo
+
+    HTTP 405 : not found
+    
+    
+* POST /search/foodDic
+
+> Params
+
+    foodname : foodname [String]
+  
+> Response
+
+    HTTP 200 : Success send foodDic
+
+    HTTP 405 : not found
+
 ## Database Schema
 
 ### User
@@ -357,7 +443,11 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > profileImage : User's Profile Image Address [String]
 
-> history : User's Search History [Array]
+> history : 
+
+>> foodname: [String]
+
+>> searchdate: [Date]
 
 >> Array Contains ONLY food's id
 
@@ -389,21 +479,13 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
 
 > name : Food's Name [String]
 
-> weight : Food's weight [String]
-
-> weightUnit : Food's weight unit [String]
+> thumbnail : Food's thumbnail [String]
 
 > barcode : Food's barcode [String]
-
-> foodType : Food's type [String]
 
 > foodAllergic : Food's allergic ingredient [String]
 
 > foodIngredient : Food's full ingredient [String]
-
-> foodCalorie : Food's calorie [Number]
-
-> foodOnceIntake : Food's recommended intake at once [String]
 
 ### SafoodGroup
 
