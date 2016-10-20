@@ -11,6 +11,7 @@ function user(app, db) {
             })
         } else res.status(403).send('Missing Params');
     });
+
     app.post('/user/getSelfInfo', function (req, res) {
         var apikey = req.body.apikey;
         if (apikey != undefined && apikey != null) {
@@ -18,16 +19,6 @@ function user(app, db) {
                 if (err) {
                     throw err;
                 } else res.send(doc);
-            })
-        } else res.status(403).send('Missing Params');
-    });
-    app.post('/user/getSearchHistory', function (req, res) {
-        var apikey = req.body.apikey;
-        if (apikey != undefined && apikey != null) {
-            db.User.findOne({apikey: apikey}, function (err, doc) {
-                if (err) {
-                    throw err;
-                } else res.send(doc.history);
             })
         } else res.status(403).send('Missing Params');
     });
@@ -139,8 +130,22 @@ function user(app, db) {
         } else res.status(403).send('Missing Params');
     });
 
+    app.post('/user/getSearchHistory', function (req, res) {
+        var params = ['apikey'];
+        history = [];
+
+        if (checkParams(req.body, params)) {
+            db.User.findOne({apikey: req.body.apikey}, function(err, user){
+                if(err) err;
+                if(user) res.send(user);
+                else res.status(405).send('not found in db');
+            });
+        } else res.status(403).send('Missing Params');
+    });
+
+
 
     function checkParams(body, params) {
-        return params.forEach(str => body[str] != undefined && body[str] != null);
+        return params.every(str => body[str] != null);
     }
 }
