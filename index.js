@@ -15,6 +15,12 @@ app.use(bodyParser.urlencoded({
 
 require('./routes/auth')(app, db, randomstring);
 require('./routes/user')(app, db);
+require('./routes/dbin')(app, db);
+require('./routes/search')(app, db);
+require('./routes/img')(app, db);
+require('./routes/group')(app, db, randomstring);
+require('./routes/fooddic')(app, db, randomstring);
+require('./routes/safood')(app, db, randomstring);
 
 module.exports = app;
 http.listen(port, function(){
