@@ -103,15 +103,13 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
     
     userid : User's id [String]
 
-    password : User's Password [String]
-
     username : User Name [String]
 
-    profileImage : User's Profile Image [File]
+    file : User's Profile Image [File]
 
 > Response
 
-    HTTP 200 : return User
+    HTTP 200 : su
 
     HTTP 403 : Params Missing
 
@@ -413,7 +411,34 @@ Safood Project (Samsung Junior Software Cup 2016) Node.JS Backend
     HTTP 200 : Success addmemo
 
     HTTP 405 : not found
-    
+
+
+* delete /group/memo
+
+> Params
+
+    groupid : groupid [String]
+
+> Response
+
+    HTTP 200 : Success delete
+
+    HTTP 500 : not found
+
+* post /group/star
+
+> Params
+
+    groupid : groupid [String]
+
+    star: true or false
+
+> Response
+
+    HTTP 200 : Success
+
+    HTTP 500 : not found    
+
     
 * POST /search/foodDic
 
